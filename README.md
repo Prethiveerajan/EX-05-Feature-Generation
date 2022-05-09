@@ -198,3 +198,76 @@ df4
 ![output](d9.png)
 ## Feature scaling using Robust Scaler:
 ![output](d10.png)
+
+
+## 3.FEATURE GENERATION FOR titanic_dataset.csv
+## CODE FOR FEATURE ENCODING AND FEATURE SCALING:
+import pandas as pd
+df=pd.read_csv("titanic_dataset.csv")
+df
+df.isnull().sum()
+df["Age"]=df["Age"].fillna(df["Age"].median())
+df["Embarked"]=df["Embarked"].fillna(df["Embarked"].mode()[0])
+df
+df.drop("Cabin",axis=1,inplace=True)
+df.drop("Ticket",axis=1,inplace=True)
+df.drop("Name",axis=1,inplace=True)
+df.isnull().sum()
+df
+from sklearn.preprocessing import LabelEncoder,OrdinalEncoder
+embark=["C","S","Q"]
+emb=OrdinalEncoder(categories=[embark])
+df["Embarked"]=emb.fit_transform(df[["Embarked"]])
+df
+from category_encoders import BinaryEncoder
+be=BinaryEncoder()
+df["Sex"]=be.fit_transform(df[["Sex"]])
+df
+
+from sklearn.preprocessing import StandardScaler
+ss=StandardScaler()
+df1=pd.DataFrame(ss.fit_transform(df),columns=['Passenger','Survived','Pclass','Sex','Age','SibSp','Parch','Fare','Embarked','PClass'])
+df1
+
+from sklearn.preprocessing import MinMaxScaler
+mms=MinMaxScaler()
+df2=pd.DataFrame(mms.fit_transform(df),columns=['Passenger','Survived','Pclass','Sex','Age','SibSp','Parch','Fare','Embarked','PClass'])
+df2
+
+from sklearn.preprocessing import MaxAbsScaler
+mas=MaxAbsScaler()
+df3=pd.DataFrame(mas.fit_transform(df),columns=['Passenger','Survived','Pclass','Sex','Age','SibSp','Parch','Fare','Embarked','PClass'])
+df3
+
+from sklearn.preprocessing import RobustScaler
+rs = RobustScaler()
+df4=pd.DataFrame(rs.fit_transform(df),columns=['Passenger','Survived','Pclass','Sex','Age','SibSp','Parch','Fare','Embarked','PClass'])
+df4
+
+
+## Output for FEATURE GENERATION FOR titanic_dataset.csv:
+## Given DataFrame:
+![ouput](t1.png)
+## Resolving null value data:
+
+![ouput](t2.png)
+![ouput](t3.png)
+## Dropping unnecessary columns:
+![ouput](t4.png)
+## Feature encoding using Ordinal Encoder:
+
+![ouput](t5.png)
+## Feature encoding using Binary Encoder:
+![ouput](t6.png)
+## Feature scaling using Standard Scaler:
+![ouput](t7.png)
+## Feature scaling using MinMax Scaler
+![ouput](t8.png)
+## Feature scaling using MaxAbs Scaler:
+![ouput](t9.png)
+## Feature scaling using Robust Scaler
+![ouput](t10.png)
+
+
+## RESULT:
+Feature Encoding process and Feature Scaling process is applied to the given data frame sucessfully.
