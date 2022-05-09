@@ -126,3 +126,75 @@ df4
 
 ## Feature scaling using Robust Scaler:
 ![output](14.png)
+
+## 2.FEATURE GENERATION FOR Encoding.csv
+
+## CODE FOR FEATURE ENCODING AND FEATURE SCALING:
+
+
+import pandas as pd
+df=pd.read_csv("Encoding Data.csv")
+df
+from sklearn.preprocessing import LabelEncoder,OrdinalEncoder
+temp=["Cold","Warm","Hot"]
+enc=OrdinalEncoder(categories=[temp])
+df["ord_2"]=enc.fit_transform(df[["ord_2"]])
+df
+from category_encoders import BinaryEncoder
+be=BinaryEncoder()
+df['bin_1']=be.fit_transform(df[['bin_1']])
+df
+be1=BinaryEncoder()
+df['bin_2']=be1.fit_transform(df[['bin_2']])
+df
+from sklearn.preprocessing import OneHotEncoder
+ohe=OneHotEncoder(sparse=False)
+ohe.fit_transform(df[["nom_0"]])
+le=LabelEncoder()
+df["nom_0"]=le.fit_transform(df[["nom_0"]])
+df
+
+from sklearn.preprocessing import StandardScaler
+sc=StandardScaler()
+df1=pd.DataFrame(sc.fit_transform(df),columns=['id','bin_1','bin_2','nom_0','Ord_2'])
+df1
+
+from sklearn.preprocessing import MinMaxScaler
+mms=MinMaxScaler()
+df2=pd.DataFrame(mms.fit_transform(df),columns=['id','bin_1','bin_2','nom_0','Ord_2'])
+df2
+
+from sklearn.preprocessing import MaxAbsScaler mas=MaxAbsScaler()
+df3=pd.DataFrame(mas.fit_transform(df),columns=['id','bin_1','bin_2','nom_0','Ord_2'])
+df3
+
+from sklearn.preprocessing import RobustScaler
+rs=RobustScaler()
+df4=pd.DataFrame(rs.fit_transform(df),columns=['id','bin_1','bin_2','nom_0','Ord_2'])
+df4
+
+## Output for FEATURE GENERATION FOR Encoding.csv:
+## Given DataFrame:
+![output](d1.png)
+## Feature encoding using Ordinal Encoder:
+![output](d2.png)
+## Feature encoding using Binary Encoder:
+![output](d3.png)
+![output](d4.png)
+
+
+## Feature encoding using One Hot Encoder:
+![output](d5.png)
+
+## Feature encoding using Label Encoder:
+![output](d6.png)
+![output](d61.png)
+
+## Feature scaling using Standard Scaler:
+![output](d7.png)
+## Feature scaling using MinMax Scaler:
+![output](d8.png)
+## Feature scaling using MaxAbs Scaler:
+![output](d9.png)
+## Feature scaling using Robust Scaler:
+![output](d10.png)
